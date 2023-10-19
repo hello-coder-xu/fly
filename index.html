@@ -34,6 +34,37 @@
         clearTimeout(timer);
       }, 1000);
     }
+
+    function openAndCheckApp() {
+      var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+      // 判断是否为Android设备
+      if (/android/i.test(userAgent)) {
+        window.location.href = "yourapp://";
+
+        // 等待1秒后检查应用是否打开
+        setTimeout(function () {
+          // 如果应用未打开，则跳转到Google Play
+          window.location.href =
+            "https://play.google.com/store/apps/details?id=com.addcn.android.house591";
+        }, 1000);
+      }
+      // 判断是否为iOS设备
+      else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        window.location.href = "yourapp://";
+
+        // 等待1秒后检查应用是否打开
+        setTimeout(function () {
+          // 如果应用未打开，则跳转到App Store
+          window.location.href = "https://apps.apple.com/app/your-app-id";
+        }, 1000);
+      }
+      // 其他设备或未知设备
+      else {
+        window.location.href =
+          "https://play.google.com/store/apps/details?id=com.addcn.android.house591";
+      }
+    }
   </script>
 
   <body>
@@ -58,6 +89,9 @@
       </button>
       <button style="margin-top: 10px" onclick="openByIframe()">
         iframe打开
+      </button>
+      <button style="margin-top: 10px" onclick="openAndCheckApp()">
+        检查并打开
       </button>
     </div>
   </body>
