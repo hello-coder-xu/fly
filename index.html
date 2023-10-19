@@ -65,6 +65,31 @@
           "https://play.google.com/store/apps/details?id=com.addcn.android.house591";
       }
     }
+
+    // 觸屏端打開APP的方法
+    function normal(url) {
+      //  为了兼容旧版本打开app的连接，对商用租屋连接特殊处理，去除business/
+      let href = typeof url === "string" ? url : window.location.href;
+      if (href.indexOf("business/rent") > -1) {
+        href = href.replace("business/rent", "rent");
+      }
+      const link = href; // 跳转到app对应的链接
+      const apn = "com.addcn.android.house591"; // 安卓app包名
+      const amv = 147; // 安卓app最低支持版本，低于此版本则跳转到谷歌商店
+      const afl =
+        "https://www.591.com.tw/home/tools/app/android?id=com.addcn.android.house591"; // 安卓app商店地址
+      const ifl = "https://www.591.com.tw/home/tools/app/ios"; // 苹果app商店地址
+      const isi = 448156496; // 苹果app商店id
+      const ibi = "com.Addcn.house591"; // 苹果app包名
+      const ipbi = "com.Addcn.house591"; // ipad打开链接的app包名
+      const efr = 1; // 设为1时可以跳过应用预览页面
+      window.location = `https://house591.page.link/?link=${link}&apn=${apn}&amv=${amv}&afl=${afl}&ifl=${ifl}&isi=${isi}&ibi=${ibi}&ipbi=${ipbi}&efr=${efr}`;
+    }
+
+    function mobileOpenApp() {
+      var value = getInputValue();
+      normal(value);
+    }
   </script>
 
   <body>
@@ -82,13 +107,16 @@
         type="text"
         style="width: 300px"
         id="myInput"
-        value="https://m.debug.591.com.tw/tw591:///newhouse/housinglist"
+        value="tw591:///newhouse/housinglist"
       />
       <button style="margin-top: 10px" onclick="openByLocation()">
         window.location打开
       </button>
       <button style="margin-top: 10px" onclick="openByIframe()">
         iframe打开
+      </button>
+      <button style="margin-top: 10px" onclick="mobileOpenApp()">
+        触屏版打开
       </button>
       <button style="margin-top: 10px" onclick="openAndCheckApp()">
         检查并打开
