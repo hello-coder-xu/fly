@@ -9,7 +9,7 @@
     function isAppInstalledOnAndroid() {
       //创建一个隐藏的 iframe 元素，并设置 src 为指定的 App Scheme
       var iframe = document.createElement("iframe");
-      iframe.src = "tw591:///main";
+      iframe.src = "app591:///main";
       iframe.style.display = "none";
       document.body.appendChild(iframe);
 
@@ -23,6 +23,6 @@
     }
   </script>
   <body>
-    <button onclick="isAppInstalledOnAndroid()">问候2</button>
+    <button onclick="isAppInstalledOnAndroid()">问候3</button>
   </body>
 </html>
