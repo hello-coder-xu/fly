@@ -7,23 +7,22 @@
   </head>
   <script>
     function isAppInstalledOnAndroid() {
-      // 创建一个隐藏的 iframe 元素，并设置 src 为指定的 App Scheme
-      //   var iframe = document.createElement("iframe");
-      //   iframe.src =
-      //     "intent://scan/#Intent;scheme=zxing;package=com.google.zxing.client.android;end";
-      //   iframe.style.display = "none";
-      //   document.body.appendChild(iframe);
+      //创建一个隐藏的 iframe 元素，并设置 src 为指定的 App Scheme
+      var iframe = document.createElement("iframe");
+      iframe.src = "tw591:///main";
+      iframe.style.display = "none";
+      document.body.appendChild(iframe);
 
-      //   // 设置一个定时器，检测是否成功打开了指定的 App
-      //   var timer = setTimeout(function () {
-      //     document.body.removeChild(iframe);
-      //     clearTimeout(timer);
-      //   }, 1000);
+      // 设置一个定时器，检测是否成功打开了指定的 App
+      var timer = setTimeout(function () {
+        document.body.removeChild(iframe);
+        clearTimeout(timer);
+      }, 1000);
       var userAgent = navigator.userAgent.toLowerCase();
       console.log("userAgent=" + userAgent);
     }
   </script>
   <body>
-    <button onclick="isAppInstalledOnAndroid()">问候1</button>
+    <button onclick="isAppInstalledOnAndroid()">问候2</button>
   </body>
 </html>
