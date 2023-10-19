@@ -6,10 +6,25 @@
     <title>Document</title>
   </head>
   <script>
-    function isAppInstalledOnAndroid(result) {
+    function getInputValue() {
+      var input = document.getElementById("myInput");
+      var value = input.value;
+      console.log("输入值为：" + value);
+      return value;
+    }
+
+    // 通过 window.location.href 打开 App
+    function openByLocation() {
+      var value = getInputValue();
+      window.location.href = value;
+    }
+
+    // 通过 iframe 打开 App
+    function openByIframe() {
+      var value = getInputValue();
       //创建一个隐藏的 iframe 元素，并设置 src 为指定的 App Scheme
       var iframe = document.createElement("iframe");
-      iframe.src = result;
+      iframe.src = value;
       iframe.style.display = "none";
       document.body.appendChild(iframe);
 
@@ -18,13 +33,6 @@
         document.body.removeChild(iframe);
         clearTimeout(timer);
       }, 1000);
-    }
-
-    function openApp() {
-      var input = document.getElementById("myInput");
-      var value = input.value;
-      console.log("输入值为：" + value);
-      isAppInstalledOnAndroid(value);
     }
   </script>
 
@@ -39,15 +47,16 @@
         flex-direction: column;
       "
     >
-      <button onclick="isAppInstalledOnAndroid()">问候6</button>
-      <br />
       <input
         type="text"
-        style="width: 300px; margin-top: 10px"
+        style="width: 300px"
         id="myInput"
         value="tw591:///newhouse/housinglist"
       />
-      <button style="margin-top: 10px" onclick="openApp()">打开app</button>
+      <button style="margin-top: 10px" onclick="openByLocation()">
+        window.location打开
+      </button>
+      <button style="margin-top: 10px" onclick="openApp()">iframe打开</button>
     </div>
   </body>
 </html>
