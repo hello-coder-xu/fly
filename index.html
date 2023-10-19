@@ -90,6 +90,25 @@
       var value = getInputValue();
       normal(value);
     }
+    // 复制文本到剪贴板
+    function toClipboard() {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        // 复制文本到剪贴板
+        var value = getInputValue();
+        const textToCopy = value;
+        navigator.clipboard
+          .writeText(textToCopy)
+          .then(() => {
+            console.log("文本已成功复制到剪贴板");
+          })
+          .catch((error) => {
+            console.error("复制文本到剪贴板时出错:", error);
+          });
+      } else {
+        // 浏览器不支持Clipboard API
+        console.error("当前浏览器不支持复制文本到剪贴板");
+      }
+    }
   </script>
 
   <body>
@@ -120,6 +139,9 @@
       </button>
       <button style="margin-top: 10px" onclick="openAndCheckApp()">
         检查并打开
+      </button>
+      <button style="margin-top: 10px" onclick="toClipboard()">
+        复制文本到剪贴板
       </button>
     </div>
   </body>
