@@ -37,10 +37,10 @@
 
     function openAndCheckApp() {
       var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-
+      var value = getInputValue();
       // 判断是否为Android设备
       if (/android/i.test(userAgent)) {
-        window.location.href = "yourapp://";
+        window.location.href = value;
 
         // 等待1秒后检查应用是否打开
         setTimeout(function () {
@@ -51,12 +51,12 @@
       }
       // 判断是否为iOS设备
       else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-        window.location.href = "yourapp://";
+        window.location.href = value;
 
         // 等待1秒后检查应用是否打开
         setTimeout(function () {
           // 如果应用未打开，则跳转到App Store
-          window.location.href = "https://apps.apple.com/app/your-app-id";
+          window.location.href = "https://apps.apple.com/app/448156496";
         }, 1000);
       }
       // 其他设备或未知设备
