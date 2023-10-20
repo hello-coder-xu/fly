@@ -44,6 +44,7 @@
 
         // 等待1秒后检查应用是否打开
         setTimeout(function () {
+          toClipboard();
           // 如果应用未打开，则跳转到Google Play
           window.location.href =
             "https://play.google.com/store/apps/details?id=com.addcn.android.house591";
@@ -126,7 +127,7 @@
         type="text"
         style="width: 300px"
         id="myInput"
-        value="keyboard://"
+        value="demo_keyboard://name=张三&age=18"
       />
       <button style="margin-top: 10px" onclick="openByLocation()">
         window.location打开
