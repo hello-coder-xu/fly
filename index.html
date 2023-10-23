@@ -110,6 +110,20 @@
         console.error("当前浏览器不支持复制文本到剪贴板");
       }
     }
+
+    function openApp() {
+      var value = getInputValue();
+      window.location.href = value;
+      setTimeout(() => {
+        // 如果成功打开了应用，则说明应用已安装
+        if (document.hidden || document.webkitHidden) {
+          // 应用已安装
+          window.close();
+        } else {
+          // 应用未安装
+        }
+      }, 2000);
+    }
   </script>
 
   <body>
@@ -123,12 +137,7 @@
         flex-direction: column;
       "
     >
-      <input
-        type="text"
-        style="width: 300px"
-        id="myInput"
-        value="demo_keyboard://name=张三&age=18"
-      />
+      <input type="text" style="width: 300px" id="myInput" value="twaddcn://" />
       <button style="margin-top: 10px" onclick="openByLocation()">
         window.location打开
       </button>
@@ -138,6 +147,7 @@
       <button style="margin-top: 10px" onclick="mobileOpenApp()">
         触屏版打开
       </button>
+      <button style="margin-top: 10px" onclick="openApp()">监听打开</button>
       <button style="margin-top: 10px" onclick="openAndCheckApp()">
         检查并打开
       </button>
