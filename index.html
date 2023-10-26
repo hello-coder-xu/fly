@@ -13,84 +13,6 @@
       return value;
     }
 
-    // 通过 window.location.href 打开 App
-    function openByLocation() {
-      var value = getInputValue();
-      window.location = value;
-    }
-
-    // 通过 iframe 打开 App
-    function openByIframe() {
-      var value = getInputValue();
-      //创建一个隐藏的 iframe 元素，并设置 src 为指定的 App Scheme
-      var iframe = document.createElement("iframe");
-      iframe.src = value;
-      iframe.style.display = "none";
-      document.body.appendChild(iframe);
-
-      // 设置一个定时器，检测是否成功打开了指定的 App
-      var timer = setTimeout(function () {
-        document.body.removeChild(iframe);
-        clearTimeout(timer);
-      }, 1000);
-    }
-
-    function openAndCheckApp() {
-      var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-      var value = getInputValue();
-      // 判断是否为Android设备
-      if (/android/i.test(userAgent)) {
-        window.location.href = value;
-
-        // 等待1秒后检查应用是否打开
-        setTimeout(function () {
-          toClipboard();
-          // 如果应用未打开，则跳转到Google Play
-          window.location.href =
-            "https://play.google.com/store/apps/details?id=com.addcn.android.house591";
-        }, 1000);
-      }
-      // 判断是否为iOS设备
-      else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-        window.location.href = value;
-
-        // 等待1秒后检查应用是否打开
-        setTimeout(function () {
-          // 如果应用未打开，则跳转到App Store
-          window.location.href = "https://apps.apple.com/app/448156496";
-        }, 1000);
-      }
-      // 其他设备或未知设备
-      else {
-        window.location.href =
-          "https://play.google.com/store/apps/details?id=com.addcn.android.house591";
-      }
-    }
-
-    // 觸屏端打開APP的方法
-    function normal(url) {
-      //  为了兼容旧版本打开app的连接，对商用租屋连接特殊处理，去除business/
-      let href = typeof url === "string" ? url : window.location.href;
-      if (href.indexOf("business/rent") > -1) {
-        href = href.replace("business/rent", "rent");
-      }
-      const link = href; // 跳转到app对应的链接
-      const apn = "com.addcn.android.house591"; // 安卓app包名
-      const amv = 147; // 安卓app最低支持版本，低于此版本则跳转到谷歌商店
-      const afl =
-        "https://www.591.com.tw/home/tools/app/android?id=com.addcn.android.house591"; // 安卓app商店地址
-      const ifl = "https://www.591.com.tw/home/tools/app/ios"; // 苹果app商店地址
-      const isi = 448156496; // 苹果app商店id
-      const ibi = "com.Addcn.house591"; // 苹果app包名
-      const ipbi = "com.Addcn.house591"; // ipad打开链接的app包名
-      const efr = 1; // 设为1时可以跳过应用预览页面
-      window.location = `https://house591.page.link/?link=${link}&apn=${apn}&amv=${amv}&afl=${afl}&ifl=${ifl}&isi=${isi}&ibi=${ibi}&ipbi=${ipbi}&efr=${efr}`;
-    }
-
-    function mobileOpenApp() {
-      var value = getInputValue();
-      normal(value);
-    }
     // 复制文本到剪贴板
     function toClipboard() {
       if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -121,6 +43,17 @@
           window.close();
         } else {
           // 应用未安装
+          var userAgent =
+            navigator.userAgent || navigator.vendor || window.opera;
+          // 复制文本到剪贴板
+          toClipboard();
+          // 跳转到下载页面
+          if (/android/i.test(userAgent)) {
+            window.location.href =
+              "https://play.google.com/store/apps/details?id=com.addcn.android.house591";
+          } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+            window.location.href = "https://apps.apple.com/app/448156496";
+          }
         }
       }, 2000);
     }
@@ -138,19 +71,7 @@
       "
     >
       <input type="text" style="width: 300px" id="myInput" value="twaddcn://" />
-      <button style="margin-top: 10px" onclick="openByLocation()">
-        window.location打开
-      </button>
-      <button style="margin-top: 10px" onclick="openByIframe()">
-        iframe打开
-      </button>
-      <button style="margin-top: 10px" onclick="mobileOpenApp()">
-        触屏版打开
-      </button>
       <button style="margin-top: 10px" onclick="openApp()">监听打开</button>
-      <button style="margin-top: 10px" onclick="openAndCheckApp()">
-        检查并打开
-      </button>
       <button style="margin-top: 10px" onclick="toClipboard()">
         复制文本到剪贴板
       </button>
